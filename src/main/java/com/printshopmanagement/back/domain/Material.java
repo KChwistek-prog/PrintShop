@@ -27,4 +27,10 @@ public class Material {
     @Column
     private String additionalComments;
 
+    public Material(String materialType, String materialName, Long materialQty, String additionalComments) {
+        this.materialType = materialType;
+        this.materialName = materialName;
+        this.materialQty = materialQty;
+        this.additionalComments = additionalComments;
+    }
 }
