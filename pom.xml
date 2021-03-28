@@ -12,7 +12,7 @@
     <artifactId>back</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>back</name>
-    <description>Print shop management aplication backend</description>
+    <description>Print shop management application backend</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -21,7 +21,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -42,6 +41,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
