@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Service
 public class MaterialMapper {
 
-    public Material mapToMaterial(MaterialDto materialDto) {
+    public Material mapToMaterial(final MaterialDto materialDto) {
         return new Material(
                 materialDto.getId(),
                 materialDto.getMaterialType(),
@@ -20,7 +20,7 @@ public class MaterialMapper {
         );
     }
 
-    public MaterialDto mapToMaterialDto(Material material) {
+    public MaterialDto mapToMaterialDto(final Material material) {
         return new MaterialDto(
                 material.getId(),
                 material.getMaterialType(),

@@ -1,19 +1,18 @@
 package com.printshopmanagement.back.controller;
 
-import com.printshopmanagement.back.domain.Employee;
-import com.printshopmanagement.back.domain.EmployeeDto;
-import com.printshopmanagement.back.domain.Material;
-import com.printshopmanagement.back.domain.MaterialDto;
+import com.printshopmanagement.back.domain.*;
 import com.printshopmanagement.back.exceptions.EmployeeNotFoundException;
+import com.printshopmanagement.back.exceptions.EquipmentNotFoundException;
 import com.printshopmanagement.back.exceptions.MaterialNotFoundException;
 import com.printshopmanagement.back.mapper.EmployeeMapper;
+import com.printshopmanagement.back.mapper.EquipmentMapper;
 import com.printshopmanagement.back.mapper.MaterialMapper;
 import com.printshopmanagement.back.repository.DbService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/v1")
@@ -22,23 +21,25 @@ public class PrintShopController {
     private final DbService dbService;
     private final EmployeeMapper employeeMapper;
     private final MaterialMapper materialMapper;
+    private final EquipmentMapper equipmentMapper;
 
-    public PrintShopController(DbService dbService, EmployeeMapper employeeMapper, MaterialMapper materialMapper) {
+    public PrintShopController(DbService dbService, EmployeeMapper employeeMapper, MaterialMapper materialMapper, EquipmentMapper equipmentMapper) {
         this.dbService = dbService;
         this.employeeMapper = employeeMapper;
         this.materialMapper = materialMapper;
+        this.equipmentMapper = equipmentMapper;
     }
 
     @PostMapping(value = "/addEmployee", consumes = MediaType.APPLICATION_JSON_VALUE)
     public EmployeeDto addEmployee(@RequestBody final EmployeeDto employeeDto) {
-        dbService.saveEmployee(employeeMapper.mapToEmployee(employeeDto));
-        return employeeDto;
+        var persistentEmployee = dbService.saveEmployee(employeeMapper.mapToEmployee(employeeDto));
+        return employeeMapper.mapToEmployeeDto(persistentEmployee);
     }
 
     @PutMapping(value = "/updateEmployee", consumes = MediaType.APPLICATION_JSON_VALUE)
     public EmployeeDto updateEmployee(@RequestBody EmployeeDto employeeDto) {
-        dbService.saveEmployee(employeeMapper.mapToEmployee(employeeDto));
-        return employeeDto;
+        var persistentEmployee = dbService.saveEmployee(employeeMapper.mapToEmployee(employeeDto));
+        return employeeMapper.mapToEmployeeDto(persistentEmployee);
     }
 
     @GetMapping(value = "/getEmployee/{id}")
@@ -50,8 +51,7 @@ public class PrintShopController {
 
     @GetMapping(value = "/getEmployees")
     public List<EmployeeDto> getEmployees() {
-        List<Employee> employees = dbService.getAllEmployees();
-        return employeeMapper.mapToEmployeeListDto(employees);
+        return employeeMapper.mapToEmployeeListDto(dbService.getAllEmployees());
     }
 
     @DeleteMapping(value = "/deleteEmployee")
@@ -60,15 +60,15 @@ public class PrintShopController {
     }
 
     @PostMapping(value = "/addMaterial", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public MaterialDto addMaterial(@RequestBody MaterialDto materialDto) {
-        dbService.saveMaterial(materialMapper.mapToMaterial(materialDto));
-        return materialDto;
+    public MaterialDto addMaterial(@RequestBody final MaterialDto materialDto) {
+        var persistMaterial = dbService.saveMaterial(materialMapper.mapToMaterial(materialDto));
+        return materialMapper.mapToMaterialDto(persistMaterial);
     }
 
     @PutMapping(value = "/updateMaterial", consumes = MediaType.APPLICATION_JSON_VALUE)
     public MaterialDto updateMaterial(@RequestBody MaterialDto materialDto) {
-        dbService.saveMaterial(materialMapper.mapToMaterial(materialDto));
-        return materialDto;
+        var persisMaterial = dbService.saveMaterial(materialMapper.mapToMaterial(materialDto));
+        return materialMapper.mapToMaterialDto(persisMaterial);
     }
 
     @GetMapping(value = "/getMaterial/{id}")
@@ -80,28 +80,40 @@ public class PrintShopController {
 
     @GetMapping(value = "/getMaterials")
     public List<MaterialDto> getMaterials() {
-        List<Material> materials = dbService.getAllMaterials();
-        return materialMapper.mapToMaterialListDto(materials);
+        return materialMapper.mapToMaterialListDto(dbService.getAllMaterials());
     }
 
     @DeleteMapping(value = "/deleteMaterial")
-    public void removeMaterial(@RequestParam("id") Long id) {
+    public void removeMaterial(@RequestParam("id") final Long id) {
         dbService.deleteMaterial(id);
     }
 
-    public void addEquipment() {
+    @PostMapping(value = "/addEquipment", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public EquipmentDto addEquipment(final EquipmentDto equipmentDto) {
+        var persistentEquipment = dbService.saveEquipment(equipmentMapper.mapToEquipment(equipmentDto));
+        return equipmentMapper.mapToEquipmentDto(persistentEquipment);
     }
 
-    public void getEquipment() {
+    @GetMapping(value = "/getEquipment/{id}")
+    public EquipmentDto getEquipment(@PathVariable("id") final Long id) throws EquipmentNotFoundException {
+        if (dbService.getEquipment(id).isPresent()){
+            return equipmentMapper.mapToEquipmentDto(dbService.getEquipment(id).get());
+        } else throw new EquipmentNotFoundException();
     }
 
-    public void getEquipments() {
+    @PutMapping(value = "/updateEquipment", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public EquipmentDto updateEquipment(@RequestBody final EquipmentDto equipmentDto) {
+        var persistentEquipment = dbService.saveEquipment(equipmentMapper.mapToEquipment(equipmentDto));
+        return equipmentMapper.mapToEquipmentDto(persistentEquipment);
     }
 
-    public void updateEquipment() {
+    @GetMapping(value = "/getEquipments")
+    public List<EquipmentDto> getEquipments() {
+        return equipmentMapper.mapToEquipmentListDto(dbService.getAllEquipments());
     }
-
-    public void removeEquipment() {
+    @DeleteMapping(value = "/deleteEquipment")
+    public void removeEquipment(@RequestParam("id") final Long id) {
+        dbService.deleteEquipment(id);
     }
 
     public void addTask() {

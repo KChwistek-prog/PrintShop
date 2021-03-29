@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeeMapper {
 
-    public Employee mapToEmployee(EmployeeDto employeeDto){
+    public Employee mapToEmployee(final EmployeeDto employeeDto){
         return new Employee(
                 employeeDto.getId(),
                 employeeDto.getEmployeePersonalNumber(),
@@ -22,7 +22,7 @@ public class EmployeeMapper {
                 );
     }
 
-    public EmployeeDto mapToEmployeeDto(Employee employee){
+    public EmployeeDto mapToEmployeeDto(final Employee employee){
         return new EmployeeDto(
                 employee.getId(),
                 employee.getEmployeePersonalNumber(),
