@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Service
 public class EquipmentMapper {
 
-    public Equipment mapToEquipment(EquipmentDto equipmentDto){
+    public Equipment mapToEquipment(EquipmentDto equipmentDto) {
         return new Equipment(
                 equipmentDto.getId(),
                 equipmentDto.getEquipmentName(),
@@ -20,7 +20,7 @@ public class EquipmentMapper {
         );
     }
 
-    public EquipmentDto mapToEquipmentDto(Equipment equipment){
+    public EquipmentDto mapToEquipmentDto(Equipment equipment) {
         return new EquipmentDto(
                 equipment.getId(),
                 equipment.getEquipmentName(),
@@ -30,7 +30,7 @@ public class EquipmentMapper {
         );
     }
 
-    public List<EquipmentDto> mapToEquipmentListDto(List<Equipment>equipmentList){
+    public List<EquipmentDto> mapToEquipmentListDto(List<Equipment> equipmentList) {
         return equipmentList.stream()
                 .map(this::mapToEquipmentDto)
                 .collect(Collectors.toList());

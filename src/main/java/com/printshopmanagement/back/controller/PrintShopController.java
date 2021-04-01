@@ -1,12 +1,8 @@
 package com.printshopmanagement.back.controller;
 
 import com.printshopmanagement.back.domain.*;
-import com.printshopmanagement.back.exceptions.EmployeeNotFoundException;
-import com.printshopmanagement.back.exceptions.EquipmentNotFoundException;
-import com.printshopmanagement.back.exceptions.MaterialNotFoundException;
-import com.printshopmanagement.back.mapper.EmployeeMapper;
-import com.printshopmanagement.back.mapper.EquipmentMapper;
-import com.printshopmanagement.back.mapper.MaterialMapper;
+import com.printshopmanagement.back.exceptions.*;
+import com.printshopmanagement.back.mapper.*;
 import com.printshopmanagement.back.repository.DbService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -22,12 +18,14 @@ public class PrintShopController {
     private final EmployeeMapper employeeMapper;
     private final MaterialMapper materialMapper;
     private final EquipmentMapper equipmentMapper;
+    private final TaskMapper taskMapper;
 
-    public PrintShopController(DbService dbService, EmployeeMapper employeeMapper, MaterialMapper materialMapper, EquipmentMapper equipmentMapper) {
+    public PrintShopController(DbService dbService, EmployeeMapper employeeMapper, MaterialMapper materialMapper, EquipmentMapper equipmentMapper, TaskMapper taskMapper) {
         this.dbService = dbService;
         this.employeeMapper = employeeMapper;
         this.materialMapper = materialMapper;
         this.equipmentMapper = equipmentMapper;
+        this.taskMapper = taskMapper;
     }
 
     @PostMapping(value = "/addEmployee", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -44,7 +42,7 @@ public class PrintShopController {
 
     @GetMapping(value = "/getEmployee/{id}")
     public EmployeeDto getEmployee(@PathVariable("id") final Long id) throws EmployeeNotFoundException {
-        if(dbService.getEmployee(id).isPresent()){
+        if (dbService.getEmployee(id).isPresent()) {
             return employeeMapper.mapToEmployeeDto(dbService.getEmployee(id).get());
         } else throw new EmployeeNotFoundException();
     }
@@ -73,7 +71,7 @@ public class PrintShopController {
 
     @GetMapping(value = "/getMaterial/{id}")
     public MaterialDto getMaterial(@PathVariable("id") final Long id) throws MaterialNotFoundException {
-        if(dbService.getMaterial(id).isPresent()){
+        if (dbService.getMaterial(id).isPresent()) {
             return materialMapper.mapToMaterialDto(dbService.getMaterial(id).get());
         } else throw new MaterialNotFoundException();
     }
@@ -89,14 +87,14 @@ public class PrintShopController {
     }
 
     @PostMapping(value = "/addEquipment", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public EquipmentDto addEquipment(final EquipmentDto equipmentDto) {
+    public EquipmentDto addEquipment(@RequestBody final EquipmentDto equipmentDto) {
         var persistentEquipment = dbService.saveEquipment(equipmentMapper.mapToEquipment(equipmentDto));
         return equipmentMapper.mapToEquipmentDto(persistentEquipment);
     }
 
     @GetMapping(value = "/getEquipment/{id}")
     public EquipmentDto getEquipment(@PathVariable("id") final Long id) throws EquipmentNotFoundException {
-        if (dbService.getEquipment(id).isPresent()){
+        if (dbService.getEquipment(id).isPresent()) {
             return equipmentMapper.mapToEquipmentDto(dbService.getEquipment(id).get());
         } else throw new EquipmentNotFoundException();
     }
@@ -111,39 +109,39 @@ public class PrintShopController {
     public List<EquipmentDto> getEquipments() {
         return equipmentMapper.mapToEquipmentListDto(dbService.getAllEquipments());
     }
+
     @DeleteMapping(value = "/deleteEquipment")
     public void removeEquipment(@RequestParam("id") final Long id) {
         dbService.deleteEquipment(id);
     }
 
-    public void addTask() {
+    @PutMapping(value = "/addTask", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public TaskDto addTask(@RequestBody final TaskDto taskDto) {
+        var persistentTask = dbService.saveTask(taskMapper.mapToTask(taskDto));
+        return taskMapper.mapToTaskDto(persistentTask);
     }
 
-    public void getTask() {
+    @GetMapping(value = "/getTask/{id}")
+    public TaskDto getTask(@PathVariable("id") final Long id) throws TaskNotFoundException {
+        var persistentTask = dbService.getTask(id);
+        if (persistentTask.isPresent()) {
+            return taskMapper.mapToTaskDto(persistentTask.get());
+        } else throw new TaskNotFoundException();
     }
 
-    public void getTasks() {
+    @GetMapping(value = "/getTaskList")
+    public List<TaskDto> getTasks() {
+        return taskMapper.mapToTaskDtoList(dbService.getTasks());
     }
 
-    public void updateTask() {
+    @PostMapping(value = "/updateTask")
+    public TaskDto updateTask(@RequestBody final TaskDto taskDto) {
+        var persistentTask = dbService.saveTask(taskMapper.mapToTask(taskDto));
+        return taskMapper.mapToTaskDto(persistentTask);
     }
 
-    public void removeTask() {
+    @DeleteMapping(value = "/deleteTask")
+    public void removeTask(@RequestParam("id") final Long id) {
+        dbService.deleteTask(id);
     }
-
-    public void addProduct() {
-    }
-
-    public void getProduct() {
-    }
-
-    public void getProducts() {
-    }
-
-    public void updateProducts() {
-    }
-
-    public void removeProduct() {
-    }
-
 }
