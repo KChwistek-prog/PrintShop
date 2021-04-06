@@ -1,6 +1,7 @@
 package com.printshopmanagement.application.repository;
 
 import com.printshopmanagement.application.domain.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.vaadin.artur.helpers.CrudService;
 
@@ -9,8 +10,11 @@ import java.util.Optional;
 
 @Service
 public class EmployeeDbService extends CrudService<Employee, Integer> {
+    private final EmployeeRepo employeeRepo;
 
-    private EmployeeRepo employeeRepo;
+    public EmployeeDbService(EmployeeRepo employeeRepo) {
+        this.employeeRepo = employeeRepo;
+    }
 
     @Override
     protected EmployeeRepo getRepository() {

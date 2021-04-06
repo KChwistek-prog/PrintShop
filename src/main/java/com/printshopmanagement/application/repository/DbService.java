@@ -12,8 +12,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class DbService {
-    @Autowired
-    private EmployeeRepo employeeRepo;
+
     @Autowired
     private MaterialRepo materialRepo;
     @Autowired

@@ -17,6 +17,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.data.converter.StringToIntegerConverter;
 import com.vaadin.flow.router.PageTitle;
@@ -90,7 +91,6 @@ public class EmployeeView extends Div {
 
         // Configure Form
         binder = new BeanValidationBinder<>(Employee.class);
-
         // Bind fields. This where you'd define e.g. validation rules
         binder.forField(id).withConverter(new StringToIntegerConverter("Only numbers are allowed")).bind("id");
         binder.forField(employeePersonalNumber).withConverter(new StringToIntegerConverter("Only numbers are allowed"))

@@ -18,7 +18,7 @@
     <description>Print shop management application</description>
 
     <properties>
-        <java.version>15</java.version>
+        <java.version>11</java.version>
         <vaadin.version>14.5.1</vaadin.version>
     </properties>
 
@@ -274,23 +274,6 @@
                         </executions>
                     </plugin>
 
-                    <!-- Runs the integration tests (*IT) after the server is started -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                    <goal>verify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <trimStackTrace>false</trimStackTrace>
-                            <enableAssertions>true</enableAssertions>
-                        </configuration>
-                    </plugin>
                 </plugins>
             </build>
         </profile>
