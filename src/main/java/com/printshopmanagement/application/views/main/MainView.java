@@ -1,6 +1,11 @@
 package com.printshopmanagement.application.views.main;
 
+import com.printshopmanagement.application.views.equipment.EquipmentView;
 import com.printshopmanagement.application.views.employee.EmployeeView;
+import com.printshopmanagement.application.views.map.GoogleMapView;
+import com.printshopmanagement.application.views.material.MaterialView;
+import com.printshopmanagement.application.views.product.ProductView;
+import com.printshopmanagement.application.views.task.TaskView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -19,6 +24,7 @@ import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
+import com.vaadin.flow.theme.material.Material;
 
 import java.util.Optional;
 
@@ -71,7 +77,13 @@ public class MainView extends AppLayout {
     }
 
     private static Tab[] getAvailableTabs(){
-        return new Tab[]{createTab("Employee", EmployeeView.class)};
+        return new Tab[]{
+                createTab("Employee", EmployeeView.class),
+                createTab("Product", ProductView.class),
+                createTab("Equipment", EquipmentView.class),
+                createTab("Material", MaterialView.class),
+                createTab("Task", TaskView.class),
+                createTab("Google Map", GoogleMapView.class)};
     }
 
     private static Tab createTab(String text, Class<? extends Component>navigationTarget) {

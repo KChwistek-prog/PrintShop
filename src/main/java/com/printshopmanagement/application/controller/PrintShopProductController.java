@@ -3,7 +3,7 @@ package com.printshopmanagement.application.controller;
 import com.printshopmanagement.application.domain.ProductDto;
 import com.printshopmanagement.application.exceptions.ProductNotFoundException;
 import com.printshopmanagement.application.mapper.ProductMapper;
-import com.printshopmanagement.application.repository.DbService;
+import com.printshopmanagement.application.repository.ProductDbService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +13,11 @@ import java.util.List;
 @RequestMapping("/v1")
 @CrossOrigin(origins = "*")
 public class PrintShopProductController {
-    private final DbService dbService;
+    private final ProductDbService dbService;
     private final ProductMapper productMapper;
 
-    public PrintShopProductController(DbService dbService, ProductMapper productMapper) {
+
+    public PrintShopProductController(ProductDbService dbService, ProductMapper productMapper) {
         this.dbService = dbService;
         this.productMapper = productMapper;
     }
@@ -28,7 +29,7 @@ public class PrintShopProductController {
     }
 
     @GetMapping(value = "/getProduct/{id}")
-    public ProductDto getProduct(@PathVariable("id") Long id) throws ProductNotFoundException {
+    public ProductDto getProduct(@PathVariable("id") Integer id) throws ProductNotFoundException {
         var persistentTask = dbService.getProduct(id);
         if (persistentTask.isPresent()) {
             return productMapper.mapToProductDto(persistentTask.get());
@@ -47,7 +48,7 @@ public class PrintShopProductController {
     }
 
     @DeleteMapping(value = "/deleteProduct")
-    public void removeProduct(@RequestParam Long id) {
+    public void removeProduct(@RequestParam Integer id) {
         dbService.deleteProduct(id);
     }
 }
