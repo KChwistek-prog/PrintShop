@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class EquipmentDto {
-    private Long id;
+    private Integer id;
     private String equipmentName;
     private String equipmentStatus;
     private String calibrationDate;
