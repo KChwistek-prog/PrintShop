@@ -1,8 +1,8 @@
 package com.printshopmanagement.application.views.main;
 
+import com.printshopmanagement.application.views.calendar.Calendar;
 import com.printshopmanagement.application.views.equipment.EquipmentView;
 import com.printshopmanagement.application.views.employee.EmployeeView;
-import com.printshopmanagement.application.views.map.GoogleMapView;
 import com.printshopmanagement.application.views.material.MaterialView;
 import com.printshopmanagement.application.views.product.ProductView;
 import com.printshopmanagement.application.views.task.TaskView;
@@ -40,7 +40,6 @@ public class MainView extends AppLayout {
         menu = createMenuTabs();
         addToNavbar(createTopBar(header, menu));
     }
-
     private VerticalLayout createTopBar(HorizontalLayout header, Tabs menu){
         VerticalLayout layout = new VerticalLayout();
         layout.getThemeList().add("dark");
@@ -83,7 +82,7 @@ public class MainView extends AppLayout {
                 createTab("Equipment", EquipmentView.class),
                 createTab("Material", MaterialView.class),
                 createTab("Task", TaskView.class),
-                createTab("Google Map", GoogleMapView.class)};
+                createTab("Calendar", Calendar.class)};
     }
 
     private static Tab createTab(String text, Class<? extends Component>navigationTarget) {

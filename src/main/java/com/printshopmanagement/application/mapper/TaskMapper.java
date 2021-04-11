@@ -15,7 +15,9 @@ public class TaskMapper {
                 task.getTaskName(),
                 task.getTaskType(),
                 task.getTaskStatus(),
-                task.getTaskComment()
+                task.getTaskComment(),
+                task.getTaskAcceptationDate(),
+                task.getTaskRealisationTerm()
         );
     }
 
@@ -25,7 +27,9 @@ public class TaskMapper {
                 taskDto.getTaskName(),
                 taskDto.getTaskType(),
                 taskDto.getTaskStatus(),
-                taskDto.getTaskComment()
+                taskDto.getTaskComment(),
+                taskDto.getTaskAcceptationDate(),
+                taskDto.getTaskRealisationTerm()
         );
     }
 

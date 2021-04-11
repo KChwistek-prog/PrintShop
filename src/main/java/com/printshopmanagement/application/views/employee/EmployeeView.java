@@ -33,7 +33,6 @@ import java.util.Optional;
 @PageTitle("Employee")
 @CssImport("./views/employee/employee-view.css")
 public class EmployeeView extends Div {
-
     private Grid<Employee> grid = new Grid<>(Employee.class, false);
 
     private TextField id;

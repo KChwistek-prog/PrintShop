@@ -4,16 +4,19 @@ import com.printshopmanagement.application.domain.*;
 import com.printshopmanagement.application.exceptions.*;
 import com.printshopmanagement.application.mapper.*;
 import com.printshopmanagement.application.repository.TaskDbService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@Controller
 @RestController
 @RequestMapping("/v1")
 @CrossOrigin(origins = "*")
 public class PrintShopTaskController {
+
     private final TaskDbService taskDbService;
     private final TaskMapper taskMapper;
 
@@ -29,7 +32,7 @@ public class PrintShopTaskController {
     }
 
     @GetMapping(value = "/getTask/{id}")
-    public TaskDto getTask(@PathVariable("id") final Long id) throws TaskNotFoundException {
+    public TaskDto getTask(@PathVariable("id") final Integer id) throws TaskNotFoundException {
         var persistentTask = taskDbService.getTask(id);
         if (persistentTask.isPresent()) {
             return taskMapper.mapToTaskDto(persistentTask.get());
@@ -48,7 +51,7 @@ public class PrintShopTaskController {
     }
 
     @DeleteMapping(value = "/deleteTask")
-    public void removeTask(@RequestParam("id") final Long id) {
+    public void removeTask(@RequestParam("id") final Integer id) {
         taskDbService.deleteTask(id);
     }
 }
