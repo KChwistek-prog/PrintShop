@@ -1,29 +1,29 @@
 package com.printshopmanagement.application.controller;
 
-import com.printshopmanagement.application.domain.*;
-import com.printshopmanagement.application.exceptions.*;
-import com.printshopmanagement.application.mapper.*;
+import com.printshopmanagement.application.domain.TaskDto;
+import com.printshopmanagement.application.exceptions.TaskNotFoundException;
+import com.printshopmanagement.application.mapper.TaskMapper;
 import com.printshopmanagement.application.repository.TaskDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
 @RestController
 @RequestMapping("/v1")
 @CrossOrigin(origins = "*")
-public class PrintShopTaskController {
+public class TaskController {
 
     private final TaskDbService taskDbService;
     private final TaskMapper taskMapper;
 
-    public PrintShopTaskController(TaskDbService taskDbService, TaskMapper taskMapper) {
+    @Autowired
+    public TaskController(TaskDbService taskDbService, TaskMapper taskMapper) {
         this.taskDbService = taskDbService;
         this.taskMapper = taskMapper;
     }
+
 
     @PutMapping(value = "/addTask", consumes = MediaType.APPLICATION_JSON_VALUE)
     public TaskDto addTask(@RequestBody final TaskDto taskDto) {

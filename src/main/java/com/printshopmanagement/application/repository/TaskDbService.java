@@ -9,6 +9,7 @@ import org.vaadin.artur.helpers.CrudService;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,16 @@ public class TaskDbService extends CrudService<Task, Integer> {
 
     public List<Task>getTasks(){
         return taskRepo.findAll();
+    }
+
+    public List<Task> getDailyTasks(){
+        List<Task> daily = new ArrayList<>();
+        for (Task task:taskRepo.findAll()) {
+            if(task.getTaskAcceptationDate().toLocalDateTime().getDayOfMonth() == LocalDateTime.now().getDayOfMonth()){
+                daily.add(task);
+            }
+        }
+        return daily;
     }
 
     public void deleteTask(final Integer id){
