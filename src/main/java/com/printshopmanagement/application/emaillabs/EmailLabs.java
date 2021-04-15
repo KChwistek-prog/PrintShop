@@ -1,8 +1,6 @@
 package com.printshopmanagement.application.emaillabs;
 
 import com.printshopmanagement.application.scheduler.MailBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -11,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +25,7 @@ public class EmailLabs {
 
             String userpass = appKey + ":" + secretKey;
             String basicAuth = "Basic "
-                    + javax.xml.bind.DatatypeConverter.printBase64Binary(userpass.getBytes("UTF-8"));
+                    + javax.xml.bind.DatatypeConverter.printBase64Binary(userpass.getBytes(StandardCharsets.UTF_8));
 
             // set params
             HashMap<String, String> params = new HashMap<>();
@@ -45,9 +44,9 @@ public class EmailLabs {
                     first = false;
                 else
                     query.append("&");
-                query.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+                query.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
                 query.append("=");
-                query.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+                query.append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
             }
 
             // setup connection

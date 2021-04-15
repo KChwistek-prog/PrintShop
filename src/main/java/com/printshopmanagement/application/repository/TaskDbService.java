@@ -1,11 +1,8 @@
 package com.printshopmanagement.application.repository;
 
-import com.printshopmanagement.application.domain.*;
-import lombok.RequiredArgsConstructor;
+import com.printshopmanagement.application.domain.Task;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
-import org.vaadin.artur.helpers.CrudService;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -13,14 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@RequiredArgsConstructor
 @Service
-public class TaskDbService extends CrudService<Task, Integer> {
+public class TaskDbService {
     private final  TaskRepo taskRepo;
 
-    @Override
-    protected JpaRepository<Task, Integer> getRepository() {
-        return taskRepo;
+    @Autowired
+    public TaskDbService(TaskRepo taskRepo) {
+        this.taskRepo = taskRepo;
     }
 
     public Task saveTask(final Task task){
@@ -29,7 +25,7 @@ public class TaskDbService extends CrudService<Task, Integer> {
         return taskRepo.save(task);
     }
 
-    public Optional<Task> getTask(final Integer id){
+    public Optional<Task> getTask(final Long id){
         return taskRepo.findById(id);
     }
 
@@ -47,7 +43,7 @@ public class TaskDbService extends CrudService<Task, Integer> {
         return daily;
     }
 
-    public void deleteTask(final Integer id){
+    public void deleteTask(final Long id){
         taskRepo.deleteById(id);
     }
 }

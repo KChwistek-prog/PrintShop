@@ -8,11 +8,11 @@ import java.sql.Timestamp;
 @Getter
 @AllArgsConstructor
 public class TaskDto {
-    private Integer id;
-    private String taskName;
-    private String taskType;
-    private String taskStatus;
-    private String taskComment;
-    private Timestamp taskAcceptationDate;
-    private Timestamp taskRealisationTerm;
+    private final Long id;
+    private final String taskName;
+    private final String taskType;
+    private final String taskStatus;
+    private final String taskComment;
+    private final Timestamp taskAcceptationDate;
+    private final Timestamp taskRealisationTerm;
 }

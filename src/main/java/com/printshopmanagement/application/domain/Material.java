@@ -25,12 +25,12 @@ public class Material {
     private Long materialQty;
 
     @Column
-    private String additionalComments;
+    private String comments;
 
-    public Material(String materialType, String materialName, Long materialQty, String additionalComments) {
+    public Material(String materialType, String materialName, Long materialQty, String comments) {
         this.materialType = materialType;
         this.materialName = materialName;
         this.materialQty = materialQty;
-        this.additionalComments = additionalComments;
+        this.comments = comments;
     }
 }

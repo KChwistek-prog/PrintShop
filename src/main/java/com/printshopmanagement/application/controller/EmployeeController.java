@@ -12,11 +12,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1")
 @CrossOrigin(origins = "*")
-public class PrintShopEmployeeController {
-    private EmployeeDbService employeeDbService;
-    private EmployeeMapper employeeMapper;
+public class EmployeeController {
+    private final EmployeeDbService employeeDbService;
+    private final EmployeeMapper employeeMapper;
 
-    public PrintShopEmployeeController(EmployeeDbService employeeDbService, EmployeeMapper employeeMapper) {
+    public EmployeeController(EmployeeDbService employeeDbService, EmployeeMapper employeeMapper) {
         this.employeeDbService = employeeDbService;
         this.employeeMapper = employeeMapper;
     }
@@ -34,7 +34,7 @@ public class PrintShopEmployeeController {
     }
 
     @GetMapping(value = "/getEmployee/{id}")
-    public EmployeeDto getEmployee(@PathVariable("id") final Integer id) throws EmployeeNotFoundException {
+    public EmployeeDto getEmployee(@PathVariable("id") final Long id) throws EmployeeNotFoundException {
         if (employeeDbService.getEmployee(id).isPresent()) {
             return employeeMapper.mapToEmployeeDto(employeeDbService.getEmployee(id).get());
         } else throw new EmployeeNotFoundException();
@@ -46,7 +46,7 @@ public class PrintShopEmployeeController {
     }
 
     @DeleteMapping(value = "/deleteEmployee")
-    public void removeEmployee(@RequestParam("id") Integer id) {
+    public void removeEmployee(@RequestParam("id") Long id) {
         employeeDbService.deleteEmployee(id);
     }
 }

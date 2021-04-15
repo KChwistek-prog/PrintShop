@@ -6,9 +6,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class EquipmentDto {
-    private Integer id;
-    private String equipmentName;
-    private String equipmentStatus;
-    private String calibrationDate;
-    private String additionalComments;
+    private final Long id;
+    private final String equipmentName;
+    private final String equipmentStatus;
+    private final String calibrationDate;
+    private final String additionalComments;
 }

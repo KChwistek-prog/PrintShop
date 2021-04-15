@@ -7,11 +7,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public class EmployeeDto {
 
-    private Integer id;
-    private Long employeePersonalNumber;
-    private String employeeFirstName;
-    private String employeeLastName;
-    private String employeeAddress;
-    private String employeeStatus;
-    private Long employeeSalary;
+    private final Long id;
+    private final Long employeePersonalNumber;
+    private final String employeeFirstName;
+    private final String employeeLastName;
+    private final String employeeAddress;
+    private final String employeeStatus;
+    private final Long employeeSalary;
 }

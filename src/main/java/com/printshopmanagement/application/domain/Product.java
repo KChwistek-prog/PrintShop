@@ -5,7 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Getter
 @Setter
@@ -15,7 +18,7 @@ import javax.persistence.*;
 public class Product {
     @Id
     @GeneratedValue
-    private Integer productId;
+    private Long productId;
 
     @Column
     private String productType;
@@ -28,4 +31,11 @@ public class Product {
 
     @Column
     private Long productPrice;
+
+    public Product(String productType, String productName, Long productQty, Long productPrice) {
+        this.productType = productType;
+        this.productName = productName;
+        this.productQty = productQty;
+        this.productPrice = productPrice;
+    }
 }

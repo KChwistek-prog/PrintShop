@@ -2,7 +2,6 @@ package com.printshopmanagement.application.controller;
 
 import com.printshopmanagement.application.domain.EquipmentDto;
 import com.printshopmanagement.application.exceptions.EquipmentNotFoundException;
-import com.printshopmanagement.application.mapper.EmployeeMapper;
 import com.printshopmanagement.application.mapper.EquipmentMapper;
 import com.printshopmanagement.application.repository.EquipmentDbService;
 import org.springframework.http.MediaType;
@@ -13,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1")
 @CrossOrigin(origins = "*")
-public class PrintShopEquipmentController {
+public class EquipmentController {
     private EquipmentDbService dbService;
     private EquipmentMapper equipmentMapper;
 
@@ -24,7 +23,7 @@ public class PrintShopEquipmentController {
     }
 
     @GetMapping(value = "/getEquipment/{id}")
-    public EquipmentDto getEquipment(@PathVariable("id") final Integer id) throws EquipmentNotFoundException {
+    public EquipmentDto getEquipment(@PathVariable("id") final Long id) throws EquipmentNotFoundException {
         if (dbService.getEquipment(id).isPresent()) {
             return equipmentMapper.mapToEquipmentDto(dbService.getEquipment(id).get());
         } else throw new EquipmentNotFoundException();
@@ -42,7 +41,7 @@ public class PrintShopEquipmentController {
     }
 
     @DeleteMapping(value = "/deleteEquipment")
-    public void removeEquipment(@RequestParam("id") final Integer id) {
+    public void removeEquipment(@RequestParam("id") final Long id) {
         dbService.deleteEquipment(id);
     }
 }

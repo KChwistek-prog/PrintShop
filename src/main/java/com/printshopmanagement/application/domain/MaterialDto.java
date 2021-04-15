@@ -6,9 +6,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class MaterialDto {
-    private Long id;
-    private String materialType;
-    private String materialName;
-    private Long materialQty;
-    private String additionalComments;
+    private final Long id;
+    private final String materialType;
+    private final String materialName;
+    private final Long materialQty;
+    private final String comments;
 }

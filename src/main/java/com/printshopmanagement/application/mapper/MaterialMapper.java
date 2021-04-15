@@ -16,7 +16,7 @@ public class MaterialMapper {
                 materialDto.getMaterialType(),
                 materialDto.getMaterialName(),
                 materialDto.getMaterialQty(),
-                materialDto.getAdditionalComments()
+                materialDto.getComments()
         );
     }
 
@@ -26,7 +26,7 @@ public class MaterialMapper {
                 material.getMaterialType(),
                 material.getMaterialName(),
                 material.getMaterialQty(),
-                material.getAdditionalComments()
+                material.getComments()
         );
     }
 

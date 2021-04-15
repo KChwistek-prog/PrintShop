@@ -1,17 +1,17 @@
 package com.printshopmanagement.application.repository;
 
 import com.printshopmanagement.application.domain.Equipment;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.vaadin.artur.helpers.CrudService;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EquipmentDbService extends CrudService<Equipment, Integer> {
+public class EquipmentDbService {
     private final EquipmentRepo equipmentRepo;
 
+    @Autowired
     public EquipmentDbService(EquipmentRepo equipmentRepo) {
         this.equipmentRepo = equipmentRepo;
     }
@@ -20,7 +20,7 @@ public class EquipmentDbService extends CrudService<Equipment, Integer> {
         return equipmentRepo.save(equipment);
     }
 
-    public Optional<Equipment> getEquipment(final Integer id) {
+    public Optional<Equipment> getEquipment(final Long id) {
         return equipmentRepo.findById(id);
     }
 
@@ -28,12 +28,8 @@ public class EquipmentDbService extends CrudService<Equipment, Integer> {
         return equipmentRepo.findAll();
     }
 
-    public void deleteEquipment(final Integer id) {
+    public void deleteEquipment(final Long id) {
         equipmentRepo.deleteById(id);
     }
 
-    @Override
-    protected JpaRepository<Equipment, Integer> getRepository() {
-        return equipmentRepo;
-    }
 }

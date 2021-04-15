@@ -4,6 +4,7 @@ import com.printshopmanagement.application.domain.MaterialDto;
 import com.printshopmanagement.application.exceptions.MaterialNotFoundException;
 import com.printshopmanagement.application.mapper.MaterialMapper;
 import com.printshopmanagement.application.repository.MaterialDbService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +13,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1")
 @CrossOrigin(origins = "*")
-public class PrintShopMaterialController {
-    private MaterialMapper materialMapper;
-    private MaterialDbService materialDbService;
+public class MaterialController {
+    private final MaterialMapper materialMapper;
+    private final MaterialDbService materialDbService;
+
+    @Autowired
+    public MaterialController(MaterialMapper materialMapper, MaterialDbService materialDbService) {
+        this.materialMapper = materialMapper;
+        this.materialDbService = materialDbService;
+    }
 
     @PostMapping(value = "/addMaterial", consumes = MediaType.APPLICATION_JSON_VALUE)
     public MaterialDto addMaterial(@RequestBody final MaterialDto materialDto) {

@@ -1,8 +1,8 @@
 package com.printshopmanagement.application.views.main;
 
 import com.printshopmanagement.application.views.calendar.Calendar;
-import com.printshopmanagement.application.views.equipment.EquipmentView;
 import com.printshopmanagement.application.views.employee.EmployeeView;
+import com.printshopmanagement.application.views.equipment.EquipmentView;
 import com.printshopmanagement.application.views.material.MaterialView;
 import com.printshopmanagement.application.views.product.ProductView;
 import com.printshopmanagement.application.views.task.TaskView;
@@ -24,7 +24,6 @@ import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
-import com.vaadin.flow.theme.material.Material;
 
 import java.util.Optional;
 

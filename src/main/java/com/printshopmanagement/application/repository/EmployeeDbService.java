@@ -2,35 +2,29 @@ package com.printshopmanagement.application.repository;
 
 import com.printshopmanagement.application.domain.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
-import org.vaadin.artur.helpers.CrudService;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeDbService extends CrudService<Employee, Integer> {
+public class EmployeeDbService {
     private final EmployeeRepo employeeRepo;
 
+    @Autowired
     public EmployeeDbService(EmployeeRepo employeeRepo) {
         this.employeeRepo = employeeRepo;
-    }
-
-    @Override
-    protected JpaRepository<Employee, Integer> getRepository() {
-        return employeeRepo;
     }
 
     public Employee saveEmployee(final Employee employee) {
         return employeeRepo.save(employee);
     }
 
-    public Optional<Employee> getEmployee(final Integer id) {
+    public Optional<Employee> getEmployee(final Long id) {
         return employeeRepo.findById(id);
     }
 
-    public void deleteEmployee(final Integer id) {
+    public void deleteEmployee(final Long id) {
         employeeRepo.deleteById(id);
     }
 
