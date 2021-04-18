@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Getter
 @AllArgsConstructor
@@ -23,7 +24,7 @@ public class Equipment {
     private String equipmentStatus;
 
     @Column
-    private String calibrationDate;
+    private Timestamp calibrationDate;
 
     @Column
     private String additionalComments;

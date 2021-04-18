@@ -1,5 +1,6 @@
 package com.printshopmanagement.application.controller;
 
+import com.printshopmanagement.application.domain.Employee;
 import com.printshopmanagement.application.domain.EmployeeDto;
 import com.printshopmanagement.application.exceptions.EmployeeNotFoundException;
 import com.printshopmanagement.application.mapper.EmployeeMapper;
@@ -8,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1")
@@ -35,9 +37,8 @@ public class EmployeeController {
 
     @GetMapping(value = "/getEmployee/{id}")
     public EmployeeDto getEmployee(@PathVariable("id") final Long id) throws EmployeeNotFoundException {
-        if (employeeDbService.getEmployee(id).isPresent()) {
-            return employeeMapper.mapToEmployeeDto(employeeDbService.getEmployee(id).get());
-        } else throw new EmployeeNotFoundException();
+        Optional<Employee> employeeOptional = employeeDbService.getEmployee(id);
+        return employeeMapper.mapToEmployeeDto(employeeOptional.orElseThrow(EmployeeNotFoundException::new));
     }
 
     @GetMapping(value = "/getEmployees")

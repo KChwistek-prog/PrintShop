@@ -37,7 +37,7 @@ public class ProductController {
         } else throw new ProductNotFoundException();
     }
 
-    @GetMapping(value = "/getProductList")
+    @GetMapping(value = "/getProducts")
     public List<ProductDto> getProducts() {
         return productMapper.mapToProductDtoList(dbService.getAllProducts());
     }

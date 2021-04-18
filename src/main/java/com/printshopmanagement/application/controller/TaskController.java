@@ -45,7 +45,7 @@ public class TaskController {
         return taskMapper.mapToTaskDtoList(tasks);
     }
 
-    @PostMapping(value = "/updateTask", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/updateTask", consumes = MediaType.APPLICATION_JSON_VALUE)
     public TaskDto updateTask(@RequestBody final TaskDto taskDto) {
         var persistentTask = taskDbService.saveTask(taskMapper.mapToTask(taskDto));
         return taskMapper.mapToTaskDto(persistentTask);
