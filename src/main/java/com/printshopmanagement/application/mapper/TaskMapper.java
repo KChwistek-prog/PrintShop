@@ -17,7 +17,7 @@ public class TaskMapper {
                 task.getTaskStatus(),
                 task.getTaskComment(),
                 task.getTaskAcceptationDate(),
-                task.getTaskRealisationTerm()
+                task.getTaskDeadline()
         );
     }
 
@@ -29,7 +29,7 @@ public class TaskMapper {
                 taskDto.getTaskStatus(),
                 taskDto.getTaskComment(),
                 taskDto.getTaskAcceptationDate(),
-                taskDto.getTaskRealisationTerm()
+                taskDto.getTaskDeadline()
         );
     }
 

@@ -2,13 +2,15 @@ package com.printshopmanagement.application.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class MaterialDto {
-    private final Long id;
-    private final String materialType;
-    private final String materialName;
-    private final Long materialQty;
-    private final String comments;
+    private Long id;
+    private String materialType;
+    private String materialName;
+    private Long materialQty;
+    private String comments;
 }

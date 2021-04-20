@@ -35,17 +35,17 @@ public class Task {
     private String taskComment;
 
     @Column
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Timestamp taskAcceptationDate;
 
     @Column
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
-    private Timestamp taskRealisationTerm;
+    private Timestamp taskDeadline;
 
-    public Task(String taskName, String taskType, String taskStatus, String taskComment) {
+    public Task(String taskName, String taskType, String taskStatus, String taskComment, Timestamp taskAcceptationDate, Timestamp taskDeadline) {
         this.taskName = taskName;
         this.taskType = taskType;
         this.taskStatus = taskStatus;
         this.taskComment = taskComment;
+        this.taskAcceptationDate = taskAcceptationDate;
+        this.taskDeadline = taskDeadline;
     }
 }

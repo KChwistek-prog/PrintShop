@@ -21,7 +21,7 @@ public class TaskDbService {
 
     public Task saveTask(final Task task){
         task.setTaskAcceptationDate(Timestamp.valueOf(LocalDateTime.now()));
-        task.setTaskRealisationTerm(Timestamp.valueOf(LocalDateTime.now().plusDays(3)));
+        task.setTaskDeadline(Timestamp.valueOf(LocalDateTime.now().plusDays(3)));
         return taskRepo.save(task);
     }
 

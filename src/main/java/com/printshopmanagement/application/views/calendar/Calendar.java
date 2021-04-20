@@ -32,7 +32,7 @@ public class Calendar extends Div {
         for (Task task : tasks) {
             entry.setTitle(task.getTaskName());
             entry.setStart(task.getTaskAcceptationDate().toLocalDateTime());
-            entry.setEnd(task.getTaskRealisationTerm().toLocalDateTime());
+            entry.setEnd(task.getTaskDeadline().toLocalDateTime());
             entry.setColor("#ff3333");
             entries.add(entry);
         }

@@ -1,5 +1,6 @@
 package com.printshopmanagement.application.views.material;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.printshopmanagement.application.controller.MaterialController;
 import com.printshopmanagement.application.domain.MaterialDto;
 import com.printshopmanagement.application.repository.MaterialDbService;
@@ -20,6 +21,12 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 
 @Route(value = "material", layout = MainView.class)
@@ -27,8 +34,6 @@ import java.util.List;
 @CssImport("./views/materials/materials-view.css")
 public class MaterialView extends Div {
     private final Grid<MaterialDto> grid = new Grid<>(MaterialDto.class);
-    private final MaterialDbService dbService;
-    private final MaterialController materialController;
     private TextField id;
     private TextField materialType;
     private TextField materialName;
@@ -38,10 +43,8 @@ public class MaterialView extends Div {
     private final Button cancel = new Button("Cancel");
     private final Button save = new Button("Save");
 
-    @Autowired
-    public MaterialView(MaterialController materialController, MaterialDbService dbService) {
-        this.materialController = materialController;
-        this.dbService = dbService;
+    public MaterialView() throws IOException {
+
         addClassName("materials-view");
         grid.setColumns("id", "materialType", "materialName", "materialQty", "comments");
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
@@ -56,8 +59,24 @@ public class MaterialView extends Div {
         refresh();
     }
 
-    public void refresh() {
-        List<MaterialDto> materialList = materialController.getMaterials();
+    public void refresh() throws IOException {
+        URL url = new URL("http://localhost:8080/v1/getMaterials");
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("Content-Type", "application/json");
+        con.getContent();
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuilder content = new StringBuilder();
+        while ((inputLine = in.readLine()) != null) {
+            content.append(inputLine);
+        }
+        con.disconnect();
+        ObjectMapper mapper = new ObjectMapper();
+        List<MaterialDto> materialList;
+        materialList = Arrays.asList(mapper.readValue(content.toString(), MaterialDto[].class));
+        in.close();
         grid.setItems(materialList);
     }
 
