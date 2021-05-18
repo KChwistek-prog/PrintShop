@@ -7,15 +7,13 @@ import com.printshopmanagement.application.mapper.TaskMapper;
 import com.printshopmanagement.application.repository.TaskDbService;
 import com.printshopmanagement.application.repository.TaskRepo;
 import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -29,7 +27,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringJUnitWebConfig
-@RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(TaskController.class)
 public class TaskControllerTestSuite {
 
@@ -51,7 +48,7 @@ public class TaskControllerTestSuite {
     private Task task;
     private TaskDto taskDto;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         gson = new Gson();
         task = new Task(1L, "Test Task", "Test Type", "Test Status", "Test Comment", tsStart, tsEnd);

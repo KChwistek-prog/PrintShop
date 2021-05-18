@@ -6,19 +6,15 @@ import com.printshopmanagement.application.domain.ProductDto;
 import com.printshopmanagement.application.mapper.ProductMapper;
 import com.printshopmanagement.application.repository.ProductDbService;
 import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.util.LambdaSafe;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +26,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringJUnitWebConfig
-@RunWith(SpringRunner.class)
 @WebMvcTest(ProductController.class)
 public class ProductControllerTestSuite {
     @Autowired
@@ -46,7 +41,7 @@ public class ProductControllerTestSuite {
     private ProductDto productDto;
     private Gson gson;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         gson = new Gson();
         product = new Product(1L, "Test", "TestProduct", 23L, 23L);

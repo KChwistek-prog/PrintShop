@@ -6,15 +6,13 @@ import com.printshopmanagement.application.domain.EmployeeDto;
 import com.printshopmanagement.application.mapper.EmployeeMapper;
 import com.printshopmanagement.application.repository.EmployeeDbService;
 import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -29,8 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringJUnitWebConfig
 @WebMvcTest(EmployeeController.class)
-@RunWith(SpringRunner.class)
 public class EmployeeControllerTestSuite {
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -44,7 +42,7 @@ public class EmployeeControllerTestSuite {
     private EmployeeDto employeeDto;
     private Gson gson;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         gson = new Gson();
         employee = new Employee(1L, 14324321L, "John", "Doe", "Elm Street", "Working", 2000L);

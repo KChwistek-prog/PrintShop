@@ -5,23 +5,18 @@ import com.printshopmanagement.application.domain.Equipment;
 import com.printshopmanagement.application.domain.EquipmentDto;
 import com.printshopmanagement.application.mapper.EquipmentMapper;
 import com.printshopmanagement.application.repository.EquipmentDbService;
-import com.printshopmanagement.application.repository.EquipmentRepo;
 import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringJUnitWebConfig
 @WebMvcTest(EquipmentController.class)
-@RunWith(SpringRunner.class)
 public class EquipmentControllerTestSuite {
 
     @Autowired
@@ -50,7 +44,7 @@ public class EquipmentControllerTestSuite {
     private Gson gson;
     private Timestamp date;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         gson = new Gson();
         equipment = new Equipment(1L, "TestName", "TestStatus", date, "comment");

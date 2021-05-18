@@ -6,16 +6,13 @@ import com.printshopmanagement.application.domain.MaterialDto;
 import com.printshopmanagement.application.mapper.MaterialMapper;
 import com.printshopmanagement.application.repository.MaterialDbService;
 import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -30,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringJUnitWebConfig
 @WebMvcTest(MaterialController.class)
-@RunWith(SpringRunner.class)
 public class MaterialControllerTestSuite {
     @Autowired
     private MockMvc mockMvc;
@@ -45,7 +41,7 @@ public class MaterialControllerTestSuite {
     private Material material;
     private MaterialDto materialDto;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         gson = new Gson();
         material = new Material(1L, "TestType", "TestName", 4L, "Comment");

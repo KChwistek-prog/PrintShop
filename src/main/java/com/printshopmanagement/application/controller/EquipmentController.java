@@ -16,8 +16,8 @@ import java.util.Optional;
 @RequestMapping("/v1")
 @CrossOrigin(origins = "*")
 public class EquipmentController {
-    private EquipmentDbService equipmentDbService;
-    private EquipmentMapper equipmentMapper;
+    private final EquipmentDbService equipmentDbService;
+    private final EquipmentMapper equipmentMapper;
 
     @Autowired
     public EquipmentController(EquipmentDbService equipmentDbService, EquipmentMapper equipmentMapper) {
