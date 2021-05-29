@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Component
 public class MailBuilder {
 
-    TaskDbService taskDbService;
+    private final TaskDbService taskDbService;
 
     public MailBuilder(TaskDbService taskDbService) {
         this.taskDbService = taskDbService;

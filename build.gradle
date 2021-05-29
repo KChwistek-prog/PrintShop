@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.4.5'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id "io.freefair.lombok" version "5.3.0"
 }
 
 group = 'com.printshopmanagement'
@@ -17,9 +18,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
-    annotationProcessor 'org.projectlombok:lombok'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'net.minidev:json-smart:2.3'
     runtimeOnly 'com.h2database:h2:1.4.200'
@@ -29,6 +28,12 @@ dependencies {
     implementation 'com.sun.xml.bind:jaxb-impl:2.3.4'
     testImplementation(platform('org.junit:junit-bom:5.7.2'))
     testImplementation('org.junit.jupiter:junit-jupiter')
+    implementation 'org.hibernate:hibernate-core:6.0.0.Alpha8'
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    testCompileOnly 'org.projectlombok:lombok:1.18.20'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+    implementation 'com.mashape.unirest:unirest-java:1.4.9'
 }
 
 test {
