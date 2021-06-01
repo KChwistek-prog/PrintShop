@@ -17,8 +17,7 @@ public class RaportScheduler {
         this.mailGun = mailGun;
     }
 
-    // @Scheduled(cron = "0 0 17 0 0")
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(fixedDelay = 100000)
     public void sendMail(){
         mailGun.sendMessage(mailBuilder);
     }

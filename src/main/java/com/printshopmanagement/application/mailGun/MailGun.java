@@ -1,6 +1,6 @@
 package com.printshopmanagement.application.mailGun;
 
-import com.printshopmanagement.application.AdminConfigs.Configuration;
+import com.printshopmanagement.application.config.MailgunApi;
 import com.printshopmanagement.application.scheduler.MailBuilder;
 import kong.unirest.HttpResponse;
 import kong.unirest.JsonNode;
@@ -12,17 +12,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class MailGun {
 
-    private final Configuration configuration;
+    private final MailgunApi mailgunApi;
 
     @Autowired
-    public MailGun(Configuration configuration) {
-        this.configuration = configuration;
+    public MailGun(MailgunApi mailgunApi) {
+        this.mailgunApi = mailgunApi;
     }
 
     public JsonNode sendMessage(MailBuilder mailBuilder) {
 
-        HttpResponse<kong.unirest.JsonNode> request = Unirest.post("https://api.eu.mailgun.net/v3/" + configuration.getDomainName() + "/messages")
-			    .basicAuth("api", configuration.getDomainApi())
+        HttpResponse<kong.unirest.JsonNode> request = Unirest.post("https://api.eu.mailgun.net/v3/" + mailgunApi.getDomainName() + "/messages")
+			    .basicAuth("api", mailgunApi.getDomainApi())
                 .queryString("from", "Excited User <vescus@gmail.com>")
                 .queryString("to", "vescus@gmail.com")
                 .queryString("subject", mailBuilder.prepareSubject())
