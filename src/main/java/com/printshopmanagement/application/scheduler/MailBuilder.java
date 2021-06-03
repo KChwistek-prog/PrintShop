@@ -24,7 +24,6 @@ public class MailBuilder {
     public String prepareData() {
         String message = "Accepted tasks: \n"
                 + taskDbService.getDailyTasks().toString();
-        System.out.println(message);
         return message;
     }
 
