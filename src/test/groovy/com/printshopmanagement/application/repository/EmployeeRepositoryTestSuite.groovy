@@ -9,15 +9,18 @@ import spock.lang.Specification
 class EmployeeRepositoryTestSuite extends Specification{
 
     @Autowired
-    private EmployeeDbService employeeDbService
+    EmployeeDbService employeeDbService
 
-    def "database should save employee"(){
-        given:
-        def employee = new Employee(1L, 231541521L, "John", "Doe", "Elm Str", "Working", 2500L)
+    Employee employee
+
+    def setup(){
+        employee = new Employee(1L, 231541521L, "John", "Doe", "Elm Str", "Working", 2500L)
+    }
+
+    def "database service should save employee"(){
         when:
         employeeDbService.saveEmployee(employee)
         then:
         employeeDbService.getEmployee(1L).isPresent()
     }
-
 }

@@ -34,6 +34,7 @@ dependencies {
     runtimeOnly 'com.h2database:h2:1.4.200'
     implementation 'org.postgresql:postgresql:42.2.20'
 
+    testImplementation 'org.spockframework:spock-spring:2.0-groovy-3.0'
     testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
     testImplementation 'org.codehaus.groovy:groovy-all:3.0.8'
 
