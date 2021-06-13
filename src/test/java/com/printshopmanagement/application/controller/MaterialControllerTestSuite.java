@@ -44,8 +44,8 @@ public class MaterialControllerTestSuite {
     @BeforeEach
     public void setUp() {
         gson = new Gson();
-        material = new Material(1L, "TestType", "TestName", 4L, "Comment");
-        materialDto = new MaterialDto(1L, "TestType", "TestName", 4L, "Comment");
+        material = new Material(1L, "TestType", "TestName", 4, "Comment");
+        materialDto = new MaterialDto(1L, "TestType", "TestName", 4, "Comment");
         when(materialMapper.mapToMaterial(any())).thenReturn(material);
         when(materialMapper.mapToMaterialDto(any())).thenReturn(materialDto);
     }
@@ -103,8 +103,8 @@ public class MaterialControllerTestSuite {
     @Test
     public void testUpdateMarial() throws Exception{
        //given
-         Material updatedMaterial = new Material(1L, "TestType", "UpdatedTestName", 4L, "Comment");
-        MaterialDto updatedMaterialDto = new MaterialDto(1L, "TestType", "UpdatedTestName", 4L, "Comment");
+         Material updatedMaterial = new Material(1L, "TestType", "UpdatedTestName", 4, "Comment");
+        MaterialDto updatedMaterialDto = new MaterialDto(1L, "TestType", "UpdatedTestName", 4, "Comment");
         when(materialMapper.mapToMaterial(any())).thenReturn(updatedMaterial);
         when(materialMapper.mapToMaterialDto(any())).thenReturn(updatedMaterialDto);
         when(materialDbService.saveMaterial(updatedMaterial)).thenReturn(updatedMaterial);

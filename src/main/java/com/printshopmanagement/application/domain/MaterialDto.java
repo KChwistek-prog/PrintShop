@@ -11,6 +11,6 @@ public class MaterialDto {
     private Long id;
     private String materialType;
     private String materialName;
-    private Long materialQty;
+    private Integer materialQty;
     private String comments;
 }

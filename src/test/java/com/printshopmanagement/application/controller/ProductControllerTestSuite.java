@@ -44,8 +44,8 @@ public class ProductControllerTestSuite {
     @BeforeEach
     public void setUp() {
         gson = new Gson();
-        product = new Product(1L, "Test", "TestProduct", 23L, 23L);
-        productDto = new ProductDto(1L, "Test", "TestProduct", 23L, 23L);
+        product = new Product(1L, "Test", "TestProduct", 23, 23);
+        productDto = new ProductDto(1L, "Test", "TestProduct", 23, 23);
         when(productMapper.mapToProduct(any())).thenReturn(product);
         when(productMapper.mapToProductDto(any())).thenReturn(productDto);
     }
@@ -97,8 +97,8 @@ public class ProductControllerTestSuite {
     @Test
     public void testUpdateProduct() throws Exception {
         //Given
-        Product updatedProduct = new Product(1L, "Test", "UpdatedProduct", 23L, 23L);
-        ProductDto updatedProductDto = new ProductDto(1L, "Test", "UpdatedProduct", 23L, 23L);
+        Product updatedProduct = new Product(1L, "Test", "UpdatedProduct", 23, 23);
+        ProductDto updatedProductDto = new ProductDto(1L, "Test", "UpdatedProduct", 23, 23);
         String updatedProductJson = gson.toJson(updatedProduct);
         //When
         when(productMapper.mapToProduct(any())).thenReturn(updatedProduct);

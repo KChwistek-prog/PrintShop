@@ -22,12 +22,12 @@ public class Material {
     private String materialName;
 
     @Column
-    private Long materialQty;
+    private Integer materialQty;
 
     @Column
     private String comments;
 
-    public Material(String materialType, String materialName, Long materialQty, String comments) {
+    public Material(String materialType, String materialName, Integer materialQty, String comments) {
         this.materialType = materialType;
         this.materialName = materialName;
         this.materialQty = materialQty;

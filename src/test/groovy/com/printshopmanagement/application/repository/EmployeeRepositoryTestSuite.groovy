@@ -12,6 +12,16 @@ class EmployeeRepositoryTestSuite extends Specification {
     @Autowired
     EmployeeDbService employeeDbService
 
+    def "database service should save employee"() {
+        given:
+        def john = new Employee(231541521L, "John", "Doe", "Elm Str", "Working", 2500L)
+        when:
+        employeeDbService.saveEmployee(john)
+        then:
+        employeeDbService.getEmployee(1L).isPresent()
+        employeeDbService.getEmployee(1L).get().employeeFirstName == "John"
+    }
+
     def "should return list of employees"() {
         given:
             def john = new Employee(231541521L, "John", "Doe", "Elm Str", "Working", 2500L)
@@ -33,16 +43,6 @@ class EmployeeRepositoryTestSuite extends Specification {
         var result = employeeDbService.getEmployee(1L)
         then:
         result.orElseThrow().getEmployeeFirstName() == "John"
-    }
-
-    def "database service should save employee"() {
-        given:
-            def john = new Employee(231541521L, "John", "Doe", "Elm Str", "Working", 2500L)
-        when:
-            employeeDbService.saveEmployee(john)
-        then:
-            employeeDbService.getEmployee(1L).isPresent()
-            employeeDbService.getEmployee(1L).get().employeeFirstName == "John"
     }
 
     def "database service should remove employee from db"() {

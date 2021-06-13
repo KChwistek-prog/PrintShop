@@ -26,12 +26,12 @@ public class Product {
     private String productName;
 
     @Column
-    private Long productQty;
+    private Integer productQty;
 
     @Column
-    private Long productPrice;
+    private Integer productPrice;
 
-    public Product(String productType, String productName, Long productQty, Long productPrice) {
+    public Product(String productType, String productName, Integer productQty, Integer productPrice) {
         this.productType = productType;
         this.productName = productName;
         this.productQty = productQty;
